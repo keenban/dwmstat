@@ -1,15 +1,15 @@
 #!/bin/bash
-battery=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) 
+battery=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) # define battery icon array
 while true; do
-    capacity=$(< /sys/class/power_supply/BAT0/capacity)
-    status=$(< /sys/class/power_supply/BAT0/status)
-    date=$(date +"%a, %-d %b %H:%M")
+    capacity=$(< /sys/class/power_supply/BAT0/capacity) # get battery capacity
+    status=$(< /sys/class/power_supply/BAT0/status) # get charging status
+    date=$(date +"%a, %-d %b %H:%M") # get date
     if [[ $status == "Discharging" ]]; then
-	index=$(( capacity < 100 ? capacity/10 : 9 ))
+	index=$(( capacity < 100 ? capacity/10 : 9 )) # get array index for capacity
     else
-	index=10
+	index=10 # set charging icon
     fi
-    output=" ${battery[index]} $capacity% | $date "
-    xprop -root -set WM_NAME "$output"
-    sleep 60
+    output=" ${battery[index]} $capacity% | $date " # set output information
+    xprop -root -set WM_NAME "$output" # put output to WM_NAME
+    sleep 60 # sleep for 60 seconds
 done
