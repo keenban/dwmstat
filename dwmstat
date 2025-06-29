@@ -1,9 +1,10 @@
 #!/bin/bash
 battery=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) # define battery icon array
 while true; do
-    capacity=$(< /sys/class/power_supply/BAT0/capacity) # get battery capacity
-    status=$(< /sys/class/power_supply/BAT0/status) # get charging status
-    date=$(date +"%a, %-d %b %H:%M") # get date
+    read -r capacity < /sys/class/power_supply/BAT0/capacity # get battery capacity
+    read -r status < /sys/class/power_supply/BAT0/status  # get charging status
+    
+     date=$(date +"%a, %-d %b %H:%M") # get date
     if [[ $status == "Discharging" ]]; then
 	index=$(( capacity < 100 ? capacity/10 : 9 )) # get array index for capacity
     else
