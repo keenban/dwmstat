@@ -1,14 +1,14 @@
 #!/bin/bash
-bat=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) 
-cap=$(< /sys/class/power_supply/BAT0/capacity)
-stat=$(< /sys/class/power_supply/BAT0/status)
+battery=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) 
+capacity=$(< /sys/class/power_supply/BAT0/capacity)
+status=$(< /sys/class/power_supply/BAT0/status)
 date=$(date +"%a, %-d %b %H:%M")
-if [[ $stat == "Discharging" ]]; then
+if [[ $status == "Discharging" ]]; then
     for i in {0..9}; do
-	if (($cap >= $i*10 && $cap < $i*10+10)); then
-	    echo " ${bat[i]}" "$cap"% \| "$date"
+	if (($capacity >= $i*10 && $capacity < $i*10+10)); then
+	    echo " ${battery[i]}" "$capacity"% \| "$date"
 	fi
     done
 else
-    echo " ${bat[10]} \|" "$date"
+    echo " ${battery[10]} \|" "$date"
 fi	   
