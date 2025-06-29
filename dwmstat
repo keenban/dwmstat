@@ -6,9 +6,10 @@ date=$(date +"%a, %-d %b %H:%M")
 if [[ $status == "Discharging" ]]; then
     for i in {0..9}; do
 	if (($capacity >= $i*10 && $capacity < $i*10+10)); then
-	    echo " ${battery[i]}" "$capacity"% \| "$date"
+	    index=$i
 	fi
     done
 else
-    echo " ${battery[10]} \|" "$date"
-fi	   
+    index=10
+fi
+echo "${battery[index]}" "$capacity"%  \|" "$date"
