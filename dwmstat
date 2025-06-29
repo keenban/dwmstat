@@ -8,4 +8,4 @@ if [[ $status == "Discharging" ]]; then
 else
     index=10
 fi
-printf "${battery[index]}" "$capacity"%  \| "$date"
+printf " %s %d%% | %s\n" "${battery[index]}" "$capacity" "$date"
