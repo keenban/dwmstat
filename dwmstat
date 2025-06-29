@@ -1,5 +1,5 @@
 #!/bin/bash
-bat=(󰂃 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹) 
+bat=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) 
 cap=$(cat /sys/class/power_supply/BAT0/capacity)
 date=$(date +"%a, %-d %b %H:%M")
 if [ $(cat /sys/class/power_supply/BAT0/status) = "Discharging" ]; then
@@ -9,5 +9,5 @@ if [ $(cat /sys/class/power_supply/BAT0/status) = "Discharging" ]; then
 	fi
     done
 else
-    echo " 󰂄 \|" "$date"
+    echo " ${bat[10]} \|" "$date"
 fi	   
