@@ -1,12 +1,15 @@
 #!/bin/bash
 battery=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄) 
-capacity=$(< /sys/class/power_supply/BAT0/capacity)
-status=$(< /sys/class/power_supply/BAT0/status)
-date=$(date +"%a, %-d %b %H:%M")
-if [[ $status == "Discharging" ]]; then
-    index=$(( capacity < 100 ? capacity/10 : 9 ))
-else
-    index=10
-fi
-output=" ${battery[index]} $capacity% | $date"
-xprop -root -set WM_NAME "$output"
+while true; do
+    capacity=$(< /sys/class/power_supply/BAT0/capacity)
+    status=$(< /sys/class/power_supply/BAT0/status)
+    date=$(date +"%a, %-d %b %H:%M")
+    if [[ $status == "Discharging" ]]; then
+	index=$(( capacity < 100 ? capacity/10 : 9 ))
+    else
+	index=10
+    fi
+    output=" ${battery[index]} $capacity% | $date "
+    xprop -root -set WM_NAME "$output"
+    sleep 60
+done
