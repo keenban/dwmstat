@@ -4,11 +4,7 @@ capacity=$(< /sys/class/power_supply/BAT0/capacity)
 status=$(< /sys/class/power_supply/BAT0/status)
 date=$(date +"%a, %-d %b %H:%M")
 if [[ $status == "Discharging" ]]; then
-    for i in {0..9}; do
-	if (($capacity >= $i*10 && $capacity < $i*10+10)); then
-	    index=$i
-	fi
-    done
+    index=$(( capacity < 100 ? capacity/10 : 9 ))
 else
     index=10
 fi
