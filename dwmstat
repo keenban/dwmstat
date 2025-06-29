@@ -3,7 +3,7 @@ bat=(󰂃 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹 󰂄)
 cap=$(< /sys/class/power_supply/BAT0/capacity)
 stat=$(< /sys/class/power_supply/BAT0/status)
 date=$(date +"%a, %-d %b %H:%M")
-if [[ $status == "Discharging" ]]; then
+if [[ $stat == "Discharging" ]]; then
     for i in {0..9}; do
 	if (($cap >= $i*10 && $cap < $i*10+10)); then
 	    echo " ${bat[i]}" "$cap"% \| "$date"
